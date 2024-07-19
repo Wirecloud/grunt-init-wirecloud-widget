@@ -32,7 +32,6 @@
     <scripts>
         <script src="js/{%= jsname %}.js"/>
     </scripts>
-    <entrypoint name="{%= entrypoint %}"/>
     <rendering height="300px" width="30%"/>
 
 </widget>

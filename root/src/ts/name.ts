@@ -9,7 +9,7 @@ import MashupPlatform = require("MashupPlatform");
 {% if (ngsi) { %}import NGSI = require("NGSI");{% }%}
 /* end-import-block */
 
-export class {%= entrypoint %} {
+export class Widget {
     private MashupPlatform: MashupPlatform;
     private shadowDOM: any;
     {% if (ngsi) { %}private NGSI: NGSI;{% }%}
@@ -27,5 +27,8 @@ export class {%= entrypoint %} {
     }
 }
 
-// We define the class as part of the window object so that it can be instantiated by Wirecloud
-(<any>window)["{%= entrypoint %}"] = {%= entrypoint %};
+if (!(<any>window).Wirecloud) {
+    (<any>window).Widget = Widget;
+} else {
+    (<any>window).Wirecloud.registerWidgetClass((<any>document).currentScript, Widget);
+}

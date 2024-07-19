@@ -51,13 +51,6 @@ var capitalizeAndRemoveUnderscore = function capitalizeAndRemoveUnderscore(old) 
     return t.charAt(0).toUpperCase() + t.slice(1);
 };
 
-var getEntrypointName = function getEntrypointName(vendor, name) {
-    // Remove all non-alphanumeric characters. Replace spaces with underscores.
-    vendor = vendor.replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '_');
-    name = name.replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '_');
-    return vendor + '_' + name;
-}
-
 // The actual init template.
 exports.template = function(grunt, init, done) {
     init.process([
@@ -130,7 +123,6 @@ exports.template = function(grunt, init, done) {
     ], function(err, props){
         var exportsOverride = {};
         props.jsname = capitalizeAndRemoveUnderscore(props.name);
-        props.entrypoint = getEntrypointName(props.vendor, props.name);
         props.bower = true; // Change way to determine bower?
         props.ngsi = false; // ??
         var bowerdeps = {};

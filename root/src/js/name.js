@@ -6,9 +6,7 @@
  * Licensed under the {%= licenses.join(', ') %} license{%= licenses.length === 1 ? '' : 's' %}.
  */
 
-/* exported {%= entrypoint %} */
-
-(function () {
+(function (script) {
 
     "use strict";
 
@@ -16,7 +14,7 @@
     // CLASS DEFINITION
     // =========================================================================
 
-    class {%= entrypoint %} {
+    class Widget {
         constructor(MashupPlatform, shadowDOM, extra) {
             this.MashupPlatform = MashupPlatform;
             this.shadowDOM = shadowDOM;
@@ -27,11 +25,15 @@
         }
     }
 
-    // We define the class as part of the window object so that it can be instantiated by Wirecloud
-    window.{%= entrypoint %} = {%= entrypoint %};
+    if (!('Wirecloud' in window)) {
+        // For testing purposes
+        window.Widget = Widget;
+    } else {
+        Wirecloud.registerWidgetClass(script, Widget);
+    }
 
     /* test-code */
 
     /* end-test-code */
 
-})();
+})(document.currentScript);

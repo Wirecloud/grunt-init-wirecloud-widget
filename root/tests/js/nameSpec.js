@@ -6,7 +6,7 @@
  * Licensed under the {%= licenses.join(', ') %} license{%= licenses.length === 1 ? '' : 's' %}.
  */
 
-/* globals $, MashupPlatform, MockMP, {%= entrypoint %} */
+/* globals $, MashupPlatform, MockMP */
 
 (function () {
 
@@ -16,16 +16,19 @@
 
         var widget;
         var MashupPlatform;
+        var Widget;
 
         beforeAll(function () {
             MashupPlatform = new MockMP({
                 type: 'widget'
             });
+
+            Widget = window.Widget;
         });
 
         beforeEach(function () {
             MashupPlatform.reset();
-            widget = new {%= entrypoint %}(MashupPlatform, undefined, {});
+            widget = new Widget(MashupPlatform, undefined, {});
         });
 
         it("Dummy test", function () {
